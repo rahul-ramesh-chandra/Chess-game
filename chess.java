@@ -2,7 +2,7 @@ import java.util.*;
 
 class chessboard {
     Scanner sc = new Scanner(System.in);
-    int i, j;
+    int i,j;
     String board[][] = {
         {"$", "a", "b", "c", "d", "e", "f", "g", "h"},
         {"1", "LR", "LN", "LB", "Q", "K", "RB", "RN", "RR"},
