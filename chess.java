@@ -1,5 +1,6 @@
 import java.util.*;
 
+//This class holds the declaration of board and display function.
 class chessboard {
     Scanner sc = new Scanner(System.in);
     int i,j;
@@ -15,6 +16,7 @@ class chessboard {
         {"8", "r", "n", "b", "k", "q", "b", "n", "r"}
     };
 
+    //This function is executed everytime after the updation of the movements.
     void display() {
         for (i = 0; i <= 8; i++) {
             for (j = 0; j <= 8; j++) {
@@ -25,6 +27,7 @@ class chessboard {
     }
 }
 
+//This is a player class which extends chessboard class in order to access the board.
 class player extends chessboard{
     public static String f1, t1;
     public static int f2, t2;
@@ -33,9 +36,12 @@ class player extends chessboard{
         this.board=board;
     }
 
+    //This function accepts the input from user in the form of rows and columns.
     void accept() {
         System.out.println("Enter column from:");
         f1 = sc.next();
+        if("cm".equals(f1))
+        System.exit(0);
         System.out.println("Enter row from:");
         f2 = sc.nextInt();
         System.out.println("Enter column to:");
@@ -46,6 +52,7 @@ class player extends chessboard{
         updatemovement(f1, f2, t1, t2);
     }
 
+    //This function updates the movement according to accepted input.
     void updatemovement(String f1, int f2, String t1, int t2) {
         int x1 = val(f1);
         int x2 = f2;
@@ -55,6 +62,7 @@ class player extends chessboard{
         board[x2][x1] = " ";
     }
     
+    //This function returns the (int)index converting it from String.
     int val(String z) {
         int t;
         switch (z) {
@@ -80,6 +88,7 @@ class player extends chessboard{
     }
 }
 
+//Main class handling 
 class chess{
     public static void main(String[] args) {
         chessboard board = new chessboard();
