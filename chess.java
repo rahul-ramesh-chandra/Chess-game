@@ -4,15 +4,15 @@ class chessboard {
     Scanner sc = new Scanner(System.in);
     int i,j;
     String board[][] = {
-        {"$", "a", "b", "c", "d", "e", "f", "g", "h"},
-        {"1", "LR", "LN", "LB", "Q", "K", "RB", "RN", "RR"},
-        {"2", "p1", "p2", "p3", "p4", "p5", "p6", "p7", "p8"},
+        {"$", "h", "g", "f", "e", "d", "c", "b", "a"},
+        {"1", "R", "N", "B", "K", "Q", "B", "N", "R"},
+        {"2", "P", "P", "P", "P", "P", "P", "P", "P"},
         {"3", " ", " ", " ", " ", " ", " ", " ", " "},
         {"4", " ", " ", " ", " ", " ", " ", " ", " "},
         {"5", " ", " ", " ", " ", " ", " ", " ", " "},
         {"6", " ", " ", " ", " ", " ", " ", " ", " "},
-        {"7", "p8", "p7", "p6", "p5", "p4", "p3", "p2", "p1"},
-        {"8", "rr", "rn", "rb", "q", "k", "lb", "ln", "lr"}
+        {"7", "p", "p", "p", "p", "p", "p", "p", "p"},
+        {"8", "r", "n", "b", "k", "q", "b", "n", "r"}
     };
 
     void display() {
@@ -51,26 +51,21 @@ class player extends chessboard{
         int x2 = f2;
         int y1 = val(t1);
         int y2 = t2;
-        //System.out.println(x1 + x2 + y1 + y2);
-        String temp = board[x2][x1];
-        //System.out.println(temp);
-        board[x2][x1] = board[y2][y1];
-        //System.out.println(board[x2][x1]);
-        board[y2][y1] = temp;
-        //System.out.println(board[y2][y1]);
+        board[y2][y1] = board[x2][x1];
+        board[x2][x1] = " ";
     }
     
     int val(String z) {
         int t;
         switch (z) {
-            case "a": t = 1; break;
-            case "b": t = 2; break;
-            case "c": t = 3; break;
-            case "d": t = 4; break;
-            case "e": t = 5; break;
-            case "f": t = 6; break;
-            case "g": t = 7; break;
-            case "h": t = 8; break;
+            case "a": t = 8; break;
+            case "b": t = 7; break;
+            case "c": t = 6; break;
+            case "d": t = 5; break;
+            case "e": t = 4; break;
+            case "f": t = 3; break;
+            case "g": t = 2; break;
+            case "h": t = 1; break;
             case "1": t = 1; break;
             case "2": t = 2; break;
             case "3": t = 3; break;
