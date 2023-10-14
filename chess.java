@@ -58,10 +58,143 @@ class player extends chessboard{
         int x2 = f2;
         int y1 = val(t1);
         int y2 = t2;
-        board[y2][y1] = board[x2][x1];
-        board[x2][x1] = " ";
+        if(isValid(x2,x1,y2,y1))
+        {
+            board[y2][y1] = board[x2][x1];
+            board[x2][x1] = " ";
+        }
+        else
+            System.out.println("Invalid move");
     }
     
+    //Conditions for pieces
+    boolean isValid(int x2,int x1,int y2,int y1)
+    {
+        switch(board[x2][x1])
+        {
+            case "R" :
+            case "r" : if(x2!=y2 && x1!=y1)
+                        return false;
+                        else
+                        {
+                            if(Rook(x2,x1,y2,y1)) {
+                                return true;
+                            }else {
+                                return false;
+                            }
+                        }
+            case "B" : 
+            case "b" : if(x2==y2 && x1==y1)
+                        return false;
+                        else
+                        {
+                            if(Bishop(x2,x1,y2,y1)) {
+                                return true;
+                            }else {
+                                return false;
+                            }
+                        }
+            case "N" : 
+            case "n" : if(x2==y2 && x1==y1)
+                        return false;
+                        else
+                        {
+                            if(Knight(x2,x1,y2,y1)) {
+                                return true;
+                            }else {
+                                return false;
+                            }
+                        } 
+            case "Q" :  
+            case "q" : if(x2!=y2 && x1!=y1)
+                        {
+                            if(Bishop(x2,x1,y2,y1)) {
+                                return true;
+                            }else {
+                                return false;
+                            }
+                        }
+                        else if(x2==y2 || x1==y1)
+                        {
+                            if(Rook(x2,x1,y2,y1)) {
+                                return true;
+                            }else {
+                                return false;
+                            }
+                        }
+                        else
+                        return false;
+            case "K" :
+            case "k" : if(Math.abs(y2-x2)==1 || Math.abs(y1-x1)==1)
+                        return true;
+                        else
+                        return false;
+        }
+        return true;
+    }
+
+    //Knight condition
+    boolean Knight(int x1, int y1, int x2, int y2) {
+    int dx = Math.abs(x2 - x1);
+    int dy = Math.abs(y2 - y1);
+
+    if((dx == 2 && dy == 1) || (dx == 1 && dy == 2))
+    return true;
+    else 
+    return false;
+    }
+
+    //Bishop condition
+    boolean Bishop(int x1, int y1, int x2, int y2) {
+    if (Math.abs(x1 - x2) == Math.abs(y1 - y2)) {
+        int minX = Math.min(x1, x2);
+        int minY = Math.min(y1, y2);
+        int maxX = Math.max(x1, x2);
+        int maxY = Math.max(y1, y2);
+
+        for (int i = 1; i < Math.abs(x1 - x2); i++) {
+            int checkX = minX + i;
+            int checkY = minY + i;
+            if (!board[checkX][checkY].equals(" ")) {
+                return false;
+            }
+        }
+        return true; 
+    }
+    return false;
+}
+
+
+    //Rook condition
+    boolean Rook(int x2,int x1,int y2,int y1)
+    {
+        if(x2==y2)
+        {
+            int max=Math.max(y1,x1);
+            int min=Math.min(y1,x1);
+            for(int i=min+1;i<max;i++)
+            {
+                if(!board[x2][i].equals(" ")) {
+                    return false;
+                }
+            }
+            return true;
+        }
+        else if(x1==y1)
+        {
+            int max=Math.max(y2,x2);
+            int min=Math.min(y2,x2);
+            for(int i=min+1;i<max;i++)
+            {
+                if(!board[i][x1].equals(" ")) {
+                    return false;
+                }
+            }
+            return true;
+        }
+        return true;
+    }
+
     //This function returns the (int)index converting it from String.
     int val(String z) {
         int t;
